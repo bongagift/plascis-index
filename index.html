@@ -59,12 +59,20 @@
             border: 1px solid #000000;
             border-radius: 980px;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
 
         .cta-button:hover {
-            background-color: #fa6000;
+            background-color: #fe5248;
             color: #ffffff;
+            border-color: #fe5248;
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(254, 82, 72, 0.3);
+        }
+
+        .cta-button:active {
+            transform: translateY(0) scale(0.98);
         }
 
         /* Footer Section */
@@ -95,12 +103,19 @@
             font-size: 12px;
             color: #515154;
             text-decoration: none;
-            transition: color 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            display: inline-block;
         }
 
         .social-links a:hover {
-            color: #fa6000;
+            color: #fe5248;
             text-decoration: underline;
+            transform: translateY(-2px);
+        }
+
+        .social-links a:active {
+            transform: translateY(0);
         }
     </style>
 </head>

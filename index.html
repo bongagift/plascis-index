@@ -320,6 +320,19 @@
         }
 
         /* Cursor Trail Effect */
+        .cursor-circle {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(10, 25, 41, 0.6);
+            background: rgba(10, 25, 41, 0.12);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease-out;
+        }
+
         .cursor-trail {
             position: fixed;
             width: 20px;
@@ -337,9 +350,17 @@
             transform: translate(-50%, -50%) scale(0.5);
         }
 
+        /* Mobile touch trail */
         @media (hover: none) and (pointer: coarse) {
+            .cursor-circle {
+                width: 100px;
+                height: 100px;
+            }
+
             .cursor-trail {
-                display: none;
+                width: 24px;
+                height: 24px;
+                background: rgba(10, 25, 41, 0.2);
             }
         }
     </style>
@@ -349,7 +370,7 @@
 
     <div class="main-content">
         <h1>Plascis</h1>
-        <p>Building the brains behind autonomous residential construction.</p>
+        <p>Coming Soon.</p>
         <a href="mailto:info@plascis.com?subject=Plascis Interest" class="cta-button">Notify me</a>
     </div>
 
@@ -399,10 +420,21 @@
         // Cursor Trail Effect
         const trails = [];
         const maxTrails = 15;
+        const proximityRadius = 40; // Radius of the cursor circle in pixels
         let mouseX = 0;
         let mouseY = 0;
+        let circleX = 0;
+        let circleY = 0;
         let isMoving = false;
         let moveTimeout;
+        let isOverFooter = false;
+        let cursorCircle;
+
+        // Create cursor circle
+        cursorCircle = document.createElement('div');
+        cursorCircle.className = 'cursor-circle';
+        cursorCircle.style.opacity = '0';
+        document.body.appendChild(cursorCircle);
 
         // Create trail elements
         for (let i = 0; i < maxTrails; i++) {
@@ -418,16 +450,53 @@
             });
         }
 
-        // Track mouse movement
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            isMoving = true;
+        // Check if cursor is over footer
+        function checkIfOverFooter(x, y) {
+            const footer = document.querySelector('footer');
+            if (footer) {
+                const rect = footer.getBoundingClientRect();
+                return y >= rect.top;
+            }
+            return false;
+        }
+
+        // Update cursor position
+        function updateCursorPosition(x, y) {
+            mouseX = x;
+            mouseY = y;
+            isOverFooter = checkIfOverFooter(x, y);
+            isMoving = !isOverFooter;
+
+            // Update cursor circle position
+            cursorCircle.style.left = mouseX + 'px';
+            cursorCircle.style.top = mouseY + 'px';
+            cursorCircle.style.opacity = isOverFooter ? '0' : '1';
 
             clearTimeout(moveTimeout);
             moveTimeout = setTimeout(() => {
                 isMoving = false;
             }, 100);
+        }
+
+        // Track mouse movement (desktop)
+        document.addEventListener('mousemove', (e) => {
+            updateCursorPosition(e.clientX, e.clientY);
+        });
+
+        // Track touch movement (mobile)
+        document.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            updateCursorPosition(touch.clientX, touch.clientY);
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const touch = e.touches[0];
+            updateCursorPosition(touch.clientX, touch.clientY);
+        }, { passive: false });
+
+        document.addEventListener('touchend', () => {
+            isMoving = false;
         });
 
         // Animate trails
@@ -444,9 +513,20 @@
                 trail.element.style.left = trail.x + 'px';
                 trail.element.style.top = trail.y + 'px';
 
-                // Fade based on distance and movement
-                if (isMoving) {
-                    const opacity = Math.max(0, 0.25 - (index * 0.015));
+                // Calculate distance from cursor
+                const dx = trail.x - mouseX;
+                const dy = trail.y - mouseY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                // Only show trails within proximity radius
+                const withinProximity = distance <= proximityRadius;
+
+                // Fade based on distance and movement, hide when over footer or outside proximity
+                if (isMoving && !isOverFooter && withinProximity) {
+                    const baseOpacity = 0.25 - (index * 0.015);
+                    // Fade based on distance from center
+                    const distanceFactor = 1 - (distance / proximityRadius);
+                    const opacity = Math.max(0, baseOpacity * distanceFactor);
                     trail.element.style.opacity = opacity;
                     trail.element.style.transform = `translate(-50%, -50%) scale(${1 - index * 0.04})`;
                 } else {
@@ -460,9 +540,23 @@
         // Start animation
         animateTrails();
 
-        // Hide trails when mouse leaves window
+        // Hide trails when mouse/touch leaves
         document.addEventListener('mouseleave', () => {
             isMoving = false;
+            cursorCircle.style.opacity = '0';
+        });
+
+        // Show cursor circle when mouse enters
+        document.addEventListener('mouseenter', () => {
+            if (!isOverFooter) {
+                cursorCircle.style.opacity = '1';
+            }
+        });
+
+        // Fade trails on touch cancel
+        document.addEventListener('touchcancel', () => {
+            isMoving = false;
+            cursorCircle.style.opacity = '0';
         });
     </script>
 

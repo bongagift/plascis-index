@@ -22,29 +22,30 @@
 
         /* Main Center Content */
         .main-content {
-            flex: 1;
-            /* Pushes the footer to the bottom */
+            min-height: 85vh;
+            /* Takes up most of the viewport */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            text-align: center;
         }
 
         h1 {
-            font-size: 40px;
+            font-size: 48px;
             font-weight: 500;
             letter-spacing: -0.028em;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             color: #1d1d1f;
         }
 
         p {
-            font-size: 17px;
+            font-size: 19px;
             font-weight: 400;
             letter-spacing: -0.014em;
             color: #86868b;
             margin-top: 0;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
 
         /* CTA Button */
@@ -78,13 +79,88 @@
         /* Footer Section */
         footer {
             width: 100%;
-            max-width: 980px;
-            /* Standard Apple content width */
-            margin: 0 auto;
-            padding: 20px 0 40px 0;
+            background-color: #f5f5f7;
             border-top: 1px solid #d2d2d7;
-            /* Subtle divider line */
+            padding: 40px 20px 30px 20px;
+        }
+
+        .footer-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-updates {
+            margin-bottom: 35px;
+        }
+
+        .footer-updates h2 {
+            font-size: 17px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #1d1d1f;
+            margin-bottom: 20px;
             text-align: center;
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .blog-post {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e5e5e7;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .blog-post-date {
+            font-size: 10px;
+            color: #86868b;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .blog-post h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 0 0 8px 0;
+        }
+
+        .blog-post p {
+            font-size: 12px;
+            color: #515154;
+            line-height: 1.4;
+            margin: 0 0 10px 0;
+        }
+
+        .read-more {
+            font-size: 11px;
+            color: #0a1929;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #d2d2d7;
         }
 
         .footer-text {
@@ -118,136 +194,67 @@
             transform: translateY(0);
         }
 
-        /* Mission Section */
-        .mission-section {
-            width: 100%;
-            background-color: #f5f5f7;
-            padding: 80px 20px;
-        }
+        /* Tablet Design */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .main-content {
+                min-height: 85vh;
+            }
 
-        .mission-container {
-            max-width: 980px;
-            margin: 0 auto;
-        }
-
-        .mission-section h2 {
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: -0.028em;
-            color: #1d1d1f;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .mission-content {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .mission-content p {
-            font-size: 19px;
-            line-height: 1.6;
-            color: #1d1d1f;
-            margin: 0;
-        }
-
-        .mission-highlight {
-            font-weight: 500;
-            color: #0a1929;
-        }
-
-        /* Blog Section */
-        .blog-section {
-            width: 100%;
-            padding: 80px 20px;
-        }
-
-        .blog-container {
-            max-width: 980px;
-            margin: 0 auto;
-        }
-
-        .blog-section h2 {
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: -0.028em;
-            color: #1d1d1f;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .blog-posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .blog-post {
-            background-color: #fafafa;
-            border-radius: 12px;
-            padding: 30px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid #e5e5e7;
-        }
-
-        .blog-post:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-        }
-
-        .blog-post-date {
-            font-size: 12px;
-            color: #86868b;
-            margin-bottom: 12px;
-        }
-
-        .blog-post h3 {
-            font-size: 21px;
-            font-weight: 600;
-            color: #1d1d1f;
-            margin: 0 0 12px 0;
-        }
-
-        .blog-post p {
-            font-size: 15px;
-            color: #515154;
-            line-height: 1.5;
-            margin: 0 0 16px 0;
-        }
-
-        .read-more {
-            font-size: 14px;
-            color: #0a1929;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .read-more:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
             h1 {
-                font-size: 32px;
+                font-size: 44px;
             }
 
-            .mission-section h2,
-            .blog-section h2 {
-                font-size: 28px;
+            p {
+                font-size: 18px;
+            }
+        }
+
+        /* Mobile Design */
+        @media (max-width: 768px) {
+            .main-content {
+                min-height: 85vh;
+                padding: 0 20px;
             }
 
-            .mission-content p {
+            h1 {
+                font-size: 42px;
+            }
+
+            p {
+                font-size: 18px;
+                max-width: 90%;
+            }
+
+            .cta-button {
+                font-size: 14px;
+                padding: 12px 24px;
+            }
+
+            .footer-updates h2 {
+                font-size: 15px;
+            }
+
+            footer {
+                padding: 30px 20px 25px 20px;
+            }
+
+            .blog-posts {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Small Mobile Design */
+        @media (max-width: 480px) {
+            .main-content {
+                min-height: 82vh;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            p {
                 font-size: 17px;
-            }
-
-            .mission-section,
-            .blog-section {
-                padding: 60px 20px;
             }
         }
     </style>
@@ -261,64 +268,45 @@
         <a href="mailto:info@plascis.com?subject=Plascis Interest" class="cta-button">Notify me</a>
     </div>
 
-    <!-- Mission Statement Section -->
-    <section class="mission-section">
-        <div class="mission-container">
-            <h2>Our Mission</h2>
-            <div class="mission-content">
-                <p>
-                    Residential construction is one of the last frontiers for full-scale automation. At Plascis, we are
-                    closing the gap between digital intelligence and physical assembly.
-                </p>
-                <p>
-                    <span class="mission-highlight">Our mission is to develop the neural frameworks and computer vision
-                        systems required to make residential building fully autonomous.</span> We believe that by
-                    solving the complexities of the construction site through ML, we can increase the speed, safety, and
-                    accessibility of housing globally.
-                </p>
-                <p>
-                    Plascis is where high-level research meets the job site. We are building the brains behind the
-                    machines that will build our future.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section class="blog-section">
-        <div class="blog-container">
-            <h2>Latest Updates</h2>
-            <div class="blog-posts">
-                <article class="blog-post">
-                    <div class="blog-post-date">Coming Soon</div>
-                    <h3>The Future of Autonomous Construction</h3>
-                    <p>Exploring how machine learning and computer vision are transforming the way we build homes.</p>
-                    <a href="#" class="read-more">Read more →</a>
-                </article>
-
-                <article class="blog-post">
-                    <div class="blog-post-date">Coming Soon</div>
-                    <h3>Neural Frameworks for Real-World Applications</h3>
-                    <p>How we're bringing cutting-edge AI research from the lab to the construction site.</p>
-                    <a href="#" class="read-more">Read more →</a>
-                </article>
-
-                <article class="blog-post">
-                    <div class="blog-post-date">Coming Soon</div>
-                    <h3>Solving the Housing Crisis with Automation</h3>
-                    <p>The role of autonomous systems in making housing more accessible worldwide.</p>
-                    <a href="#" class="read-more">Read more →</a>
-                </article>
-            </div>
-        </div>
-    </section>
-
     <footer>
-        <div class="footer-text">Copyright © 2026 Plascis Inc. All rights reserved.</div>
-        <div class="social-links">
-            <a href="https://instagram.com/plascisai">Instagram</a>
-            <a href="https://x.com/plascisai">X</a>
-            <a href="https://linkedin.com/company/blarqo">Linkedin</a>
+        <div class="footer-container">
+            <!-- Updates Section -->
+            <div class="footer-updates">
+                <h2>Latest Updates</h2>
+                <div class="blog-posts">
+                    <article class="blog-post">
+                        <div class="blog-post-date">January 19, 2026</div>
+                        <h3>The Future of Autonomous Construction</h3>
+                        <p>Exploring how machine learning and computer vision are transforming the way we build homes.
+                        </p>
+                        <a href="blog-autonomous-construction.html" class="read-more">Read more →</a>
+                    </article>
+
+                    <article class="blog-post">
+                        <div class="blog-post-date">January 19, 2026</div>
+                        <h3>Neural Frameworks for Real-World Applications</h3>
+                        <p>How we're bringing cutting-edge AI research from the lab to the construction site.</p>
+                        <a href="blog-neural-frameworks.html" class="read-more">Read more →</a>
+                    </article>
+
+                    <article class="blog-post">
+                        <div class="blog-post-date">January 19, 2026</div>
+                        <h3>Solving the Housing Crisis with Automation</h3>
+                        <p>The role of autonomous systems in making housing more accessible worldwide.</p>
+                        <a href="blog-housing-crisis.html" class="read-more">Read more →</a>
+                    </article>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-text">Copyright © 2026 Plascis Inc. All rights reserved.</div>
+                <div class="social-links">
+                    <a href="https://instagram.com/plascisai">Instagram</a>
+                    <a href="https://x.com/plascisai">X</a>
+                    <a href="https://linkedin.com/company/blarqo">Linkedin</a>
+                </div>
+            </div>
         </div>
     </footer>
 

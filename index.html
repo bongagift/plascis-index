@@ -117,6 +117,139 @@
         .social-links a:active {
             transform: translateY(0);
         }
+
+        /* Mission Section */
+        .mission-section {
+            width: 100%;
+            background-color: #f5f5f7;
+            padding: 80px 20px;
+        }
+
+        .mission-container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .mission-section h2 {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.028em;
+            color: #1d1d1f;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .mission-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mission-content p {
+            font-size: 19px;
+            line-height: 1.6;
+            color: #1d1d1f;
+            margin: 0;
+        }
+
+        .mission-highlight {
+            font-weight: 500;
+            color: #0a1929;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            width: 100%;
+            padding: 80px 20px;
+        }
+
+        .blog-container {
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .blog-section h2 {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.028em;
+            color: #1d1d1f;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-post {
+            background-color: #fafafa;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e5e5e7;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-post-date {
+            font-size: 12px;
+            color: #86868b;
+            margin-bottom: 12px;
+        }
+
+        .blog-post h3 {
+            font-size: 21px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 0 0 12px 0;
+        }
+
+        .blog-post p {
+            font-size: 15px;
+            color: #515154;
+            line-height: 1.5;
+            margin: 0 0 16px 0;
+        }
+
+        .read-more {
+            font-size: 14px;
+            color: #0a1929;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .mission-section h2,
+            .blog-section h2 {
+                font-size: 28px;
+            }
+
+            .mission-content p {
+                font-size: 17px;
+            }
+
+            .mission-section,
+            .blog-section {
+                padding: 60px 20px;
+            }
+        }
     </style>
 </head>
 
@@ -124,9 +257,61 @@
 
     <div class="main-content">
         <h1>Plascis</h1>
-        <p>Coming soon.</p>
+        <p>Building the brains behind autonomous residential construction.</p>
         <a href="mailto:info@plascis.com?subject=Plascis Interest" class="cta-button">Notify me</a>
     </div>
+
+    <!-- Mission Statement Section -->
+    <section class="mission-section">
+        <div class="mission-container">
+            <h2>Our Mission</h2>
+            <div class="mission-content">
+                <p>
+                    Residential construction is one of the last frontiers for full-scale automation. At Plascis, we are
+                    closing the gap between digital intelligence and physical assembly.
+                </p>
+                <p>
+                    <span class="mission-highlight">Our mission is to develop the neural frameworks and computer vision
+                        systems required to make residential building fully autonomous.</span> We believe that by
+                    solving the complexities of the construction site through ML, we can increase the speed, safety, and
+                    accessibility of housing globally.
+                </p>
+                <p>
+                    Plascis is where high-level research meets the job site. We are building the brains behind the
+                    machines that will build our future.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section">
+        <div class="blog-container">
+            <h2>Latest Updates</h2>
+            <div class="blog-posts">
+                <article class="blog-post">
+                    <div class="blog-post-date">Coming Soon</div>
+                    <h3>The Future of Autonomous Construction</h3>
+                    <p>Exploring how machine learning and computer vision are transforming the way we build homes.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-post-date">Coming Soon</div>
+                    <h3>Neural Frameworks for Real-World Applications</h3>
+                    <p>How we're bringing cutting-edge AI research from the lab to the construction site.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+
+                <article class="blog-post">
+                    <div class="blog-post-date">Coming Soon</div>
+                    <h3>Solving the Housing Crisis with Automation</h3>
+                    <p>The role of autonomous systems in making housing more accessible worldwide.</p>
+                    <a href="#" class="read-more">Read more →</a>
+                </article>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <div class="footer-text">Copyright © 2026 Plascis Inc. All rights reserved.</div>

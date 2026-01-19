@@ -478,86 +478,11 @@
             }, 100);
         }
 
-        // Track mouse movement (desktop)
-        document.addEventListener('mousemove', (e) => {
-            updateCursorPosition(e.clientX, e.clientY);
-        });
+        /
 
-        // Track touch movement (mobile)
-        document.addEventListener('touchstart', (e) => {
-            const touch = e.touches[0];
-            updateCursorPosition(touch.clientX, touch.clientY);
-        });
 
-        document.addEventListener('touchmove', (e) => {
-            e.preventDefault();
-            const touch = e.touches[0];
-            updateCursorPosition(touch.clientX, touch.clientY);
-        }, { passive: false });
 
-        document.addEventListener('touchend', () => {
-            isMoving = false;
-        });
-
-        // Animate trails
-        function animateTrails() {
-            trails.forEach((trail, index) => {
-                const targetX = mouseX;
-                const targetY = mouseY;
-
-                // Smooth follow effect with delay
-                trail.x += (targetX - trail.x) * (0.15 - trail.delay);
-                trail.y += (targetY - trail.y) * (0.15 - trail.delay);
-
-                // Update position
-                trail.element.style.left = trail.x + 'px';
-                trail.element.style.top = trail.y + 'px';
-
-                // Calculate distance from cursor
-                const dx = trail.x - mouseX;
-                const dy = trail.y - mouseY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                // Only show trails within proximity radius
-                const withinProximity = distance <= proximityRadius;
-
-                // Fade based on distance and movement, hide when over footer or outside proximity
-                if (isMoving && !isOverFooter && withinProximity) {
-                    const baseOpacity = 0.25 - (index * 0.015);
-                    // Fade based on distance from center
-                    const distanceFactor = 1 - (distance / proximityRadius);
-                    const opacity = Math.max(0, baseOpacity * distanceFactor);
-                    trail.element.style.opacity = opacity;
-                    trail.element.style.transform = `translate(-50%, -50%) scale(${1 - index * 0.04})`;
-                } else {
-                    trail.element.style.opacity = '0';
-                }
-            });
-
-            requestAnimationFrame(animateTrails);
-        }
-
-        // Start animation
-        animateTrails();
-
-        // Hide trails when mouse/touch leaves
-        document.addEventListener('mouseleave', () => {
-            isMoving = false;
-            cursorCircle.style.opacity = '0';
-        });
-
-        // Show cursor circle when mouse enters
-        document.addEventListener('mouseenter', () => {
-            if (!isOverFooter) {
-                cursorCircle.style.opacity = '1';
-            }
-        });
-
-        // Fade trails on touch cancel
-        document.addEventListener('touchcancel', () => {
-            isMoving = false;
-            cursorCircle.style.opacity = '0';
-        });
+        
     </script>
 
 </body>

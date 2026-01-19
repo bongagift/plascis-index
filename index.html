@@ -318,6 +318,30 @@
                 display: inline-block;
             }
         }
+
+        /* Cursor Trail Effect */
+        .cursor-trail {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(10, 25, 41, 0.15);
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease-out, opacity 0.3s ease-out;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .cursor-trail.fade {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.5);
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .cursor-trail {
+                display: none;
+            }
+        }
     </style>
 </head>
 
@@ -370,6 +394,77 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Cursor Trail Effect
+        const trails = [];
+        const maxTrails = 15;
+        let mouseX = 0;
+        let mouseY = 0;
+        let isMoving = false;
+        let moveTimeout;
+
+        // Create trail elements
+        for (let i = 0; i < maxTrails; i++) {
+            const trail = document.createElement('div');
+            trail.className = 'cursor-trail';
+            trail.style.opacity = '0';
+            document.body.appendChild(trail);
+            trails.push({
+                element: trail,
+                x: 0,
+                y: 0,
+                delay: i * 0.02
+            });
+        }
+
+        // Track mouse movement
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            isMoving = true;
+
+            clearTimeout(moveTimeout);
+            moveTimeout = setTimeout(() => {
+                isMoving = false;
+            }, 100);
+        });
+
+        // Animate trails
+        function animateTrails() {
+            trails.forEach((trail, index) => {
+                const targetX = mouseX;
+                const targetY = mouseY;
+
+                // Smooth follow effect with delay
+                trail.x += (targetX - trail.x) * (0.15 - trail.delay);
+                trail.y += (targetY - trail.y) * (0.15 - trail.delay);
+
+                // Update position
+                trail.element.style.left = trail.x + 'px';
+                trail.element.style.top = trail.y + 'px';
+
+                // Fade based on distance and movement
+                if (isMoving) {
+                    const opacity = Math.max(0, 0.25 - (index * 0.015));
+                    trail.element.style.opacity = opacity;
+                    trail.element.style.transform = `translate(-50%, -50%) scale(${1 - index * 0.04})`;
+                } else {
+                    trail.element.style.opacity = '0';
+                }
+            });
+
+            requestAnimationFrame(animateTrails);
+        }
+
+        // Start animation
+        animateTrails();
+
+        // Hide trails when mouse leaves window
+        document.addEventListener('mouseleave', () => {
+            isMoving = false;
+        });
+    </script>
 
 </body>
 
